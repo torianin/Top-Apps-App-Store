@@ -13,6 +13,7 @@ import SwiftyJSON
 class AppsList {
     let AppsURL = NSURL(string: "https://itunes.apple.com/us/rss/toppaidapplications/limit=100/json")
     
+    
     private var delegate: AppsListShouldRefreshDelegate
     private(set) var apps: [App] = []
     
@@ -25,6 +26,7 @@ class AppsList {
         Alamofire.request(.GET, URLString: AppsURL!)
             .responseJSON {(request,response,data,error) in
                 let json = JSON(data!)
+                self.apps = []
                 if let topApps = json["feed"]["entry"].array {
                     for app in topApps {
                         let appName: String? = app["im:name"]["label"].string

@@ -38,11 +38,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.textLabel?.text = String(indexPath.row + 1) + ". " + self.appsList.apps[indexPath.row].name!
         Alamofire.request(.GET,URLString: self.appsList.apps[indexPath.row].imageUrl!)
             .response { (_, _, data, _) in
-                let image = UIImage(data: data as! NSData)
-                cell.imageView!.image = image
+                cell.imageView!.image = UIImage(data: data as! NSData)
+                cell.setNeedsLayout()
         }
         return cell
     }
+    
+
     
     func shouldRefresh() {
         appsTableView.reloadData()
