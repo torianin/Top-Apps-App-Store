@@ -58,7 +58,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Top Apps App Store" id="A6y-be-JWz"/>
                     <connections>
-                        <outlet property="tableView" destination="Dcu-TR-Xxp" id="Gex-Gk-3Bx"/>
+                        <outlet property="appsTableView" destination="Dcu-TR-Xxp" id="n3f-A5-2kx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
