@@ -16,16 +16,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var tableView: UITableView!
 
     var apps: [App] = []
-
-    lazy var refreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: "handleRefresh:", forControlEvents: UIControlEvents.ValueChanged)
-        return refreshControl
-    }()
-    
+    var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshControl.addTarget(self, action: "handleRefresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.getDataFromURL()
         self.tableView.addSubview(self.refreshControl)
     }
@@ -43,6 +38,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         cell.textLabel?.text = String(indexPath.row + 1) + ". " + apps[indexPath.row].name!
+        Alamofire.request(.GET,URLString: apps[indexPath.row].imageUrl!)
+            .response { (_, _, data, _) in
+                let image = UIImage(data: data as! NSData)
+                cell.imageView!.image = image
+        }
         return cell
     }
     
