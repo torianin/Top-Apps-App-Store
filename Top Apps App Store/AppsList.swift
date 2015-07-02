@@ -16,7 +16,8 @@ class AppsList {
     
     private var delegate: AppsListShouldRefreshDelegate
     private(set) var apps: [App] = []
-    
+    var filteredApps: [App] = []
+
     init(aDelegate: AppsListShouldRefreshDelegate) {
         delegate = aDelegate
         getDataFromURL()
